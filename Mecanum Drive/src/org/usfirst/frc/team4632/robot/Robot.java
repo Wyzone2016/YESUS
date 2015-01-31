@@ -1,6 +1,7 @@
 package org.usfirst.frc.team4632.robot;
 
 
+import edu.wpi.first.wpilibj.CameraServer;
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.RobotDrive;
 import edu.wpi.first.wpilibj.RobotDrive.MotorType;
@@ -23,9 +24,13 @@ public class Robot extends SampleRobot {
     
     // The channel on the driver station that the joystick is connected to
     final int joystickChannel	= 0;
+	private CameraServer server;
 
     public Robot() {
-    	
+    	 server = CameraServer.getInstance();
+         server.setQuality(50);
+         //the camera name (ex "cam0") can be found through the roborio web interface
+         server.startAutomaticCapture("cam0");
         robotDrive = new RobotDrive(frontLeftChannel, rearLeftChannel, frontRightChannel, rearRightChannel);
     	robotDrive.setInvertedMotor(MotorType.kFrontLeft, true);	// invert the left side motors
     	robotDrive.setInvertedMotor(MotorType.kRearLeft, true);		// you may need to change or remove this to match your robot
